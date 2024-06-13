@@ -208,7 +208,7 @@ def eday():
 
                             first_key = random.choice(list(user_data.keys()))
                             phone_ebay= user_data[first_key].strip()
-                            response_delete = requests.delete('{}/premiumy/num_ebay/sms_ebay/{}/{}.json'.format(firebaseio_link,code_country,int(phone_ebay)))
+                            #response_delete = requests.delete('{}/premiumy/num_ebay/sms_ebay/{}/{}.json'.format(firebaseio_link,code_country,int(phone_ebay)))
                             print(phone_ebay)
                             for a in phone_ebay:
                                 driver.find_element(By.NAME, "phoneCountry").send_keys(Keys.BACKSPACE)
