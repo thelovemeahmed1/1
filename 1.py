@@ -39,7 +39,7 @@ from urllib.parse import unquote, quote, quote_plus, urlsplit
 import multiprocessing
 from subprocess import Popen
 import sys
-firebaseio_link='https://tiktok10-86541-default-rtdb.firebaseio.com'
+firebaseio_link='https://tiktok8-a66ea-default-rtdb.firebaseio.com'
 
 xvfb = Popen(['Xvfb', ':1', '-screen', '0', '1920x1080x24'])
 os.environ['DISPLAY'] = ':1'
@@ -208,13 +208,13 @@ def eday():
 
                             first_key = random.choice(list(user_data.keys()))
                             phone_ebay= user_data[first_key].strip()
-                            #response_delete = requests.delete('{}/premiumy/num_ebay/sms_ebay/{}/{}.json'.format(firebaseio_link,code_country,int(phone_ebay)))
+                            response_delete = requests.delete('{}/premiumy/num_ebay/sms_ebay/{}/{}.json'.format(firebaseio_link,code_country,int(phone_ebay)))
                             print(phone_ebay)
                             for a in phone_ebay:
                                 driver.find_element(By.NAME, "phoneCountry").send_keys(Keys.BACKSPACE)
 
                             time.sleep(2)
-                            driver.find_element(By.NAME, "phoneCountry").send_keys(int(phone_ebay.split(code_country)[-1]))
+                            driver.find_element(By.NAME, "phoneCountry").send_keys(int(phone_ebay))#.split(code_country)[-1]
                             time.sleep(2)
                             driver.find_element(By.ID, 'SEND_AUTH_CODE').click()
                             '''
