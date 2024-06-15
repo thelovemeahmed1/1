@@ -43,7 +43,7 @@ firebaseio_link='https://tiktok8-a66ea-default-rtdb.firebaseio.com'
 
 xvfb = Popen(['Xvfb', ':1', '-screen', '0', '1920x1080x24'])
 os.environ['DISPLAY'] = ':1'
-code_country = '49'
+code_country = '40'
 def eday():
     while True:
         try:
@@ -225,6 +225,7 @@ def eday():
                                 except Exception as s:
                                     print('Text me again')
                             '''
+                            #time.sleep(15)
                             driver.save_screenshot(f'{phone_ebay}.png')
                         elif backbutton:
                             driver.find_element(By.ID, 'backbutton').click()
