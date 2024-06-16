@@ -43,7 +43,7 @@ firebaseio_link='https://tiktok8-a66ea-default-rtdb.firebaseio.com'
 
 xvfb = Popen(['Xvfb', ':1', '-screen', '0', '1920x1080x24'])
 os.environ['DISPLAY'] = ':1'
-code_country = '40'
+code_country = '7'
 def eday():
     while True:
         try:
