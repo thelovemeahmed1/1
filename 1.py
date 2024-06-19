@@ -39,11 +39,11 @@ from urllib.parse import unquote, quote, quote_plus, urlsplit
 import multiprocessing
 from subprocess import Popen
 import sys
-firebaseio_link='https://tiktok8-a66ea-default-rtdb.firebaseio.com'
+firebaseio_link='https://hotmail-4261b-default-rtdb.firebaseio.com'
 
 xvfb = Popen(['Xvfb', ':1', '-screen', '0', '1920x1080x24'])
 os.environ['DISPLAY'] = ':1'
-code_country = '36'
+code_country = '998'
 def eday():
     while True:
         try:
