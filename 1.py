@@ -43,7 +43,7 @@ firebaseio_link='https://hotmail-4261b-default-rtdb.firebaseio.com'
 
 xvfb = Popen(['Xvfb', ':1', '-screen', '0', '1920x1080x24'])
 os.environ['DISPLAY'] = ':1'
-code_country = '998'
+code_country = '63'
 def eday():
     while True:
         try:
