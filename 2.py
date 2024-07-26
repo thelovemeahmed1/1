@@ -50,7 +50,15 @@ public class WhatsappAccessibilityService extends AccessibilityService {
     private void closeApp(String packageName) {
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         if (activityManager != null) {
+            // This will stop the package by killing its process
             activityManager.killBackgroundProcesses(packageName);
+
+            // Use reflection to call forceStopPackage
+            try {
+                activityManager.getClass().getMethod("forceStopPackage", String.class).invoke(activityManager, packageName);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to stop package", e);
+            }
         }
     }
 
