@@ -1,6 +1,8 @@
 package com.whatsapp.myapplication;
 
 import android.accessibilityservice.AccessibilityService;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
@@ -13,7 +15,7 @@ public class WhatsappAccessibilityService extends AccessibilityService {
     protected void onServiceConnected() {
         Log.d(TAG, "onServiceConnected.");
         super.onServiceConnected();
-        
+
         // Start a new thread to handle the repeated opening and closing of the app
         new Thread(new Runnable() {
             @Override
@@ -46,10 +48,10 @@ public class WhatsappAccessibilityService extends AccessibilityService {
     }
 
     private void closeApp(String packageName) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        if (activityManager != null) {
+            activityManager.killBackgroundProcesses(packageName);
+        }
     }
 
     @Override
