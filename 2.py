@@ -3,7 +3,10 @@ from appium.webdriver.common.mobileby import MobileBy
 import requests
 import random
 import time
+from selenium.webdriver.remote.remote_connection import RemoteConnection
 
+# تعيين مهلة الاتصال إلى 60 ثانية
+RemoteConnection.set_timeout(60)
 # إعدادات Appium
 desired_caps = {
     "platformName": "Android",
