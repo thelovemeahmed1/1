@@ -4,32 +4,35 @@ import android.accessibilityservice.AccessibilityService;
 import android.content.Intent;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityNodeInfo;
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 public class WhatsappAccessibilityService extends AccessibilityService {
     private static final String TAG = "WhatsappAccessibilitySe";
+    private static final String PACKAGE_NAME = "io.oxylabs.proxymanager";
 
     @Override
     protected void onServiceConnected() {
         Log.d(TAG, "onServiceConnected.");
         super.onServiceConnected();
-        // Start a new thread to handle the repeated closing of the app
+        
+        // Start a new thread to handle the repeated opening and closing of the app
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
                     try {
+                        // Open the app
+                        Intent launchIntent = getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
+                        if (launchIntent != null) {
+                            startActivity(launchIntent);
+                        }
+                        Log.d(TAG, "App opened: " + PACKAGE_NAME);
+
+                        // Wait for 10 seconds
+                        Thread.sleep(10000);
+
                         // Close the app
-                        Intent closeIntent = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-                        sendBroadcast(closeIntent);
-
-                        // Force-stop the app
-                        String packageName = "io.oxylabs.proxymanager";
-                        Runtime.getRuntime().exec("am force-stop " + packageName);
-
-                        // Log the action
-                        Log.d(TAG, "App closed: " + packageName);
+                        Runtime.getRuntime().exec("am force-stop " + PACKAGE_NAME);
+                        Log.d(TAG, "App closed: " + PACKAGE_NAME);
 
                         // Wait for 60 seconds before repeating
                         Thread.sleep(60000);
