@@ -1,4 +1,8 @@
 from appium import webdriver
+from selenium.webdriver.remote.remote_connection import RemoteConnection
+
+# تعيين مهلة الاتصال إلى 60 ثانية
+RemoteConnection.set_timeout(60)
 
 # إعداد القدرات
 desired_caps = {
@@ -12,8 +16,7 @@ desired_caps = {
         "proxyType": "manual",
         "httpProxy": "gw.dataimpulse.com:823",
         "sslProxy": "gw.dataimpulse.com:823"
-    },
-    "adbExecTimeout": 60000  # تعيين المهلة إلى 60 ثانية
+    }
 }
 
 # عنوان الخادم و المنفذ
