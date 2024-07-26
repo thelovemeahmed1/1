@@ -23,6 +23,7 @@ public class WhatsappAccessibilityService extends AccessibilityService {
                         // Open the app
                         Intent launchIntent = getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
                         if (launchIntent != null) {
+                            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(launchIntent);
                         }
                         Log.d(TAG, "App opened: " + PACKAGE_NAME);
@@ -31,7 +32,7 @@ public class WhatsappAccessibilityService extends AccessibilityService {
                         Thread.sleep(10000);
 
                         // Close the app
-                        Runtime.getRuntime().exec("am force-stop " + PACKAGE_NAME);
+                        closeApp(PACKAGE_NAME);
                         Log.d(TAG, "App closed: " + PACKAGE_NAME);
 
                         // Wait for 60 seconds before repeating
@@ -42,6 +43,13 @@ public class WhatsappAccessibilityService extends AccessibilityService {
                 }
             }
         }).start();
+    }
+
+    private void closeApp(String packageName) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
